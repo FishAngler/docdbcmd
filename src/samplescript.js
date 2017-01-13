@@ -26,10 +26,8 @@ exports.run = function(client) {
                     resolve(0);
                 }
             });
+            //========================== Your Custom Code ==================================
         }
-
-        //========================== Your Custom Code ==================================
-
     );
     return promise;
     //return 0;
