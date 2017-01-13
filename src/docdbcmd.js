@@ -20,7 +20,6 @@
         var isPromise = res && typeof res.then == 'function';
         
         if (isPromise) {
-            console.log("a promise");
             res.then(function(val) {
                 process.exitCode = 0;
                 if(val && Number.isInteger(val)) {
@@ -31,12 +30,9 @@
                 process.exitCode = 1;
             });
         } else if (Number.isInteger(res)) {
-            console.log("a number");
             process.exitCode = res;
         } else {
-            console.log("something else");
             process.exitCode = 0;
         }
-        
     }
 })();
