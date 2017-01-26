@@ -2,10 +2,34 @@
 (function() {
     var DocumentClient = require('documentdb').DocumentClient;
     var docdbcmd = {};
+    
+    var installRequiredModules = function (required) {
+
+        var p = new Promise(function (resolve, reject) {
+
+            if (!required || required.length === 0) { resolve(); return; }
+
+            var npm = require('npm');
+            npm.load({ loaded: false }, function (er) {
+
+                if (er) { reject(er); return; }
+
+                npm.commands.install(required, function (er) {
+                    if (er) { reject(er); return; }
+
+                    var results = {};
+                    for (var i=0; i < required.length; i++) results[required[i]] = require(required[i]);
+                    resolve(results);
+                });
+            });
+        });
+        return p;
+    }
+        
     exports.run = docdbcmd.run = function(fileToExecute, host, key) {
         var client = new DocumentClient(host, { masterKey: key });
         var f = require(fileToExecute);
-        return f.run(client);
+        return f.run(client, installRequiredModules);
     }
 
     if (!module.parent) {
