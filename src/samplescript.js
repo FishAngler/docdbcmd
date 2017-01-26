@@ -1,4 +1,4 @@
-exports.run = function(client) {
+exports.run = function(client, docdbcmdFunctions) {
 
     // You can return a promise, a number, or any other object
     // The shell is smart enough to work with any of those return types
@@ -9,9 +9,14 @@ exports.run = function(client) {
     var promise = new Promise(
         function(resolve, reject) {
 
+            //=====================  If you want to install a new module   ===============
+            var deepEqual;
+            
+            docdbcmdFunctions.installRequiredModules(['deep-equal'])
+                .then(function(results) { deepEqual = results['deep-equal']});
 
-            //========================== Your Custom Code ==================================
-
+            //========================== Your Custom Code =================================
+            
             var sproc = {
                 id: "test",
                 body: function() {
