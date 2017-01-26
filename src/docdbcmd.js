@@ -3,12 +3,14 @@
     var DocumentClient = require('documentdb').DocumentClient;
     var docdbcmd = {};
     
-    var installRequiredModules = function (required) {
+	var docdbcmdFunctions = {};
+	
+	docdbcmdFunctions.installRequiredModules = function (required) {
 
         var p = new Promise(function (resolve, reject) {
-
-            if (!required || required.length === 0) { resolve(); return; }
-
+	
+			if (!required || required.length === 0) { resolve(); return; }
+			
             var npm = require('npm');
             npm.load({ loaded: false }, function (er) {
 
@@ -17,7 +19,7 @@
                 npm.commands.install(required, function (er) {
                     if (er) { reject(er); return; }
 
-                    var results = {};
+					var results = {};
                     for (var i=0; i < required.length; i++) results[required[i]] = require(required[i]);
                     resolve(results);
                 });
@@ -29,7 +31,7 @@
     exports.run = docdbcmd.run = function(fileToExecute, host, key) {
         var client = new DocumentClient(host, { masterKey: key });
         var f = require(fileToExecute);
-        return f.run(client, installRequiredModules);
+        return f.run(client, docdbcmdFunctions);
     }
 
     if (!module.parent) {
