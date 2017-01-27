@@ -1,6 +1,6 @@
 {
   "name": "docdbcmd",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Shell for running DocumentDb statements for automating commands to run against a documentdb database",
   "main": "docdbcmd.js",
   "scripts": {
