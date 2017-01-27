@@ -1,7 +1,7 @@
 {
   "name": "docdbcmd",
-  "version": "1.0.2",
-  "description": "Shell for running DocumentDb statements for automating commands to run against a documentdb database",
+  "version": "1.0.3",
+  "description": "Shell for running DocumentDb statements for automating commands to run against a documentdb database. Documentation: https://github.com/FishAngler/docdbcmd",
   "main": "docdbcmd.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +15,6 @@
   "dependencies": {
     "documentdb": ">=1.10.1 <2.0.0",
     "npm": ">=3.10"
-  }
+  },
+  "homepage": "https://github.com/FishAngler/docdbcmd"
 }
